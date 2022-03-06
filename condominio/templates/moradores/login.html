@@ -1,0 +1,38 @@
+{% extends "login.html" %}
+
+
+{% block content %}
+<div class="container text-center" > 
+   
+  <div class="row   justify-content-center  " >
+    <div class="col col-lg-4 col-md-6 card shadow-lg rounded rounded-3" id="login">
+      <div class="text-center py-4 ">
+        <h2>Login Sindico</h2>
+        {% include '_messages.html' %}
+      </div>
+      {% from "_formhelpers.html" import render_field %}
+      <form  method="POST" enctype="multipart/form-data">
+        <div class="form-floating"> 
+          {{ render_field(form.email, class="form-control form-control-lg", placeholder="E-mail" ) }}
+               
+        </div>
+        <div class="form-floating">
+          {{ render_field(form.password, class="form-control form-control-lg", placeholder="Digite a senha") }}
+          
+        </div>
+        <div class="row row-cols-1">
+          <div class="col">
+            <p class="text-center">Ainda não tem uma conta? <a href="{{url_for('moradorregister')}}" class="text-dark ms-2">Cadastrar</a></p>
+          </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Login</button>
+        
+      </form>
+     
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

@@ -3,15 +3,15 @@ from wtforms import ValidationError, StringField, PasswordField, validators, For
 from .modules import Morador
 
 
-class RegisterMorador(FlaskForm):
+class RegisterMorador(Form):
     nome = StringField('', [ validators.length(min=4, max=45), validators.DataRequired()])
     usuario = StringField('', [ validators.length(min=4, max=45), validators.DataRequired()])
     email = StringField('', [ validators.length(min=4, max=45), validators.DataRequired()])
     tel = StringField('', [ validators.length(min=4, max=20), validators.DataRequired()])
-    bloco = StringField('', [ validators.length(min=4, max=20), validators.DataRequired()])
-    apto = StringField('', [ validators.length(min=4, max=20), validators.DataRequired()])
+    bloco = StringField('', [  validators.DataRequired()])
+    apto = StringField('', [ validators.DataRequired()])
     password = PasswordField('', [validators.DataRequired(), validators.EqualTo('confirm', message='As senhas devem ser iguais!')])
-    confirm = PasswordField('', validators.DataRequired())
+    confirm = PasswordField('',[ validators.DataRequired()])
 
     def validate_user(self,usuario):
         if Morador.query.filter_by(usuario=usuario.data).first():

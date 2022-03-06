@@ -8,7 +8,7 @@ class RegisterSindico(Form):
     email = StringField('', [validators.length(min=1, max=45), validators.DataRequired()])
     tel = StringField('', [validators.length(min=1, max=20), validators.DataRequired()])
     password = PasswordField('', [validators.DataRequired(), validators.EqualTo('confirm', message='As senhas devem ser iguais!')])
-    confirm = PasswordField('',validators.DataRequired())
+    confirm = PasswordField('',[validators.DataRequired()])
 
     def validate_usuario(self,usuario):
         if Sindico.query.filter_by(usuario=usuario.data).first():

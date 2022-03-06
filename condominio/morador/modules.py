@@ -7,7 +7,7 @@ def load_morador(user_id):
     return Morador.query.get(user_id)
 
 
-class Morador(db.Moedel,UserMixin):
+class Morador(db.Model,UserMixin):
     __tablename__= "Morador"
 
     id = db.Column(db.Integer, primary_key=True)  
