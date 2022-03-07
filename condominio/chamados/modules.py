@@ -12,7 +12,7 @@ class Chamados(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = db.Column(db.Integer,unique=True)
+    morador_id = db.Column(db.Integer,unique=False)
     data_entrada = db.Column(db.DateTime,nullable= False,default=datetime.utcnow)
 
     def __repr__(self):
@@ -26,7 +26,7 @@ class Sugestoes(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = db.Column(db.Integer,unique=True)
+    morador_id = db.Column(db.Integer)
     data_entrada = db.Column(db.DateTime,nullable= False,default=datetime.utcnow)
 
     def __repr__(self):
@@ -40,7 +40,7 @@ class Mensagem(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = db.Column(db.Integer,unique=True)
+    morador_id = db.Column(db.Integer)
     data_entrada = db.Column(db.DateTime,nullable= False,default=datetime.utcnow)
     def __repr__(self):
         return '<Mensagem %r>' % self.name

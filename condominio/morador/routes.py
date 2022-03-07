@@ -10,9 +10,9 @@ from flask_login import login_user, logout_user, login_required, current_user
 @login_required
 def morador():
     morador_id = current_user.id
-    chamados = Chamados.query.filter_by(morador_id=morador_id).first()
-    sugestoes = Sugestoes.query.filter_by(morador_id=morador_id).first()
-    mensagem = Mensagem.query.filter_by(morador_id=morador_id).first()
+    chamados = Chamados.query.filter_by(morador_id=morador_id).all()
+    sugestoes = Sugestoes.query.filter_by(morador_id=morador_id).all()
+    mensagem = Mensagem.query.filter_by(morador_id=morador_id).all()
 
     return render_template('/moradores/index.html', title='Home', chamados=chamados, sugestoes=sugestoes, mensagens=mensagem)  
 
