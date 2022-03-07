@@ -2,48 +2,150 @@
 
 {% block content %}
 
-
-<div class="container-fluid">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('morador')}}">Home</a>
-              </li>
-            
-            </ul>
-            <ul class="navbar-nav  justify-content-end">
-              {% if current_user.is_authenticated %}
-              <span class="nav-link me-3 "> {{current_user.usuario}}</span>
-              <li class="nav-item">
-                <a class="nav-link"  href="{{url_for('logoutmorador')}}">Sair</a>
-              </li>
-              {% else %}
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-</header>
-<div class="row text-center">
-    <div class="col">
-        <h2>Pagina em construção</h2>
-        <div class="col py-2 " id="register">
-            <div class="text-center p-3 ">
-                {% include '_messages.html' %}
-            </div>
-        </div>
-    </div>
-</div>
-<a class="btn btn-primary"  href="{{url_for('moradorchamados')}}">Novo Chamado</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Morador</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('morador')}}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('moradorchamados')}}">Novo Chamado</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('moradorsugestoes')}}">Nova Sugestão</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('moradormensagem')}}">Nova Mensagem</a>
+        </li>
 
-    {{chamados.nome}}
+        </ul>
+        <ul class="navbar-nav  justify-content-end">
+          {% if current_user.is_authenticated %}
+          <span class="nav-link me-3 "> {{current_user.usuario}}</span>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('logoutmorador')}}">Sair</a>
+          </li>
+          {% else %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid">
+ 
+  <div class="row text-center">
+    <div class="col">
+      <div class="col py-2 " id="register">
+        <div class="text-center p-3 ">
+          {% include '_messages.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100 shadow ">
+        <div class="card-body">
+          <h5 class="card-title text-center">Chamados</h5>
+          <table class="table table-striped table-hover text-center my-3">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Bloco</th>
+                <th scope="col">Apto</th>
+                <th scope="col">Entrada</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>{{chamados.nome}}</td>
+                <td>{{chamados.bloco}}</td>
+                <td>{{chamados.apto}}</td>
+                <td>{{chamados.data_entrada}}</td>
+                <td>{{chamados.descricao}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+          <a class="btn btn-dark btn-sm" href="{{url_for('moradorchamados')}}">Novo Chamado</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Sugestões</h5>
+          <table class="table table-striped table-hover text-center my-3">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Bloco</th>
+                <th scope="col">Apto</th>
+                <th scope="col">Entrada</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>{{sugestoes.nome}}</td>
+                <td>{{sugestoes.bloco}}</td>
+                <td>{{sugestoes.apto}}</td>
+                <td>{{sugestoes.data_entrada}}</td>
+                <td>{{sugestoes.descricao}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+          <a class="btn btn-dark btn-sm" href="{{url_for('moradorsugestoes')}}">Nova Sugestão</a>
+        </div>
+      </div>
+    </div>
+  <div class="col">
+    <div class="card h-100 shadow">
+      <div class="card-body">
+        <h5 class="card-title">Mensagens</h5>
+        <table class="table table-striped table-hover text-center my-3">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Bloco</th>
+              <th scope="col">Apto</th>
+              <th scope="col">Entrada</th>
+              <th scope="col">Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>{{mensagens.nome}}</td>
+              <td>{{mensagens.bloco}}</td>
+              <td>{{mensagens.apto}}</td>
+              <td>{{mensagens.data_entrada}}</td>
+              <td>{{mensagens.descricao}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+        <a class="btn btn-dark btn-sm" href="{{url_for('moradormensagem')}}">Nova Mensagem</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 {% endblock content %}

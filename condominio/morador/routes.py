@@ -14,7 +14,7 @@ def morador():
     sugestoes = Sugestoes.query.filter_by(morador_id=morador_id).first()
     mensagem = Mensagem.query.filter_by(morador_id=morador_id).first()
 
-    return render_template('/moradores/index.html', title='Home', chamados=chamados, sugestoes=sugestoes, mensagem=mensagem)  
+    return render_template('/moradores/index.html', title='Home', chamados=chamados, sugestoes=sugestoes, mensagens=mensagem)  
 
 
 @app.route('/cadastrar', methods=['POST', 'GET'])

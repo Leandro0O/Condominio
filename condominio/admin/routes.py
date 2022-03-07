@@ -3,6 +3,7 @@ from flask import request,render_template,session,url_for,flash,redirect
 from condominio import app, bcrypt, db
 from .modules import Sindico
 from .forms import RegisterSindico, LoginSindico
+from condominio.chamados.modules import Chamados,Sugestoes,Mensagem
 
 
 
@@ -11,7 +12,11 @@ def admin():
     if 'usuario' not in session:
         flash('SOMENTE ACESSO AUTORIZADO, FAÇA LOGIN PARA ACESSAR!', 'danger')
         return redirect(url_for('loginsindico'))
-    return render_template('sindicos/index.html', titile='Admin')
+
+    chamados = Chamados.query.all()
+    sugestoes = Sugestoes.query.all()
+    mensagem = Mensagem.query.all() 
+    return render_template('sindicos/index.html', titile='Admin', chamados=chamados, sugestoes=sugestoes, mensagens=mensagem, session=session)
 
 
 @app.route('/admin/cadastrar', methods=['POST','GET'])    
@@ -58,3 +63,7 @@ def loginsindico():
             flash('Não foi possivel realizar o login!', 'danger')  
     return render_template('sindicos/login.html', form=form,title="Login Sindico") 
             
+@app.route('/admin/logout')
+def logoutadmin():
+    session.pop('usuario')
+    return redirect(url_for('admin'))            
