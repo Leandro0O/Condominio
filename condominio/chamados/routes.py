@@ -2,8 +2,10 @@ from condominio import db, login_manager,bcrypt,app
 from flask import render_template, redirect, flash, session, url_for,request
 from .modules import Mensagem, Chamados , Sugestoes
 from .forms import AbreMensagem, AbreChamados , AbreSugestoes
+from condominio.morador.modules import Morador
+from condominio.morador.forms import LoginMorador
+from condominio.admin.forms import LoginSindico
 from flask_login import login_required, current_user
-
 
 
 
@@ -12,6 +14,7 @@ from flask_login import login_required, current_user
 @login_required
 def moradorchamados():
     form = AbreChamados(request.form)
+    morador = Morador.query.filter_by(id=current_user.id).first()
     if request.method == 'POST' and current_user.is_authenticated:
         morador_id = current_user.id
         try:
@@ -29,7 +32,7 @@ def moradorchamados():
         except Exception as e:
             print(e)
     
-    return render_template('/moradores/chamados.html', title='Home', form=form)    
+    return render_template('/moradores/chamados.html', title='Home', form=form, morador=morador)    
 
 
 @app.route('/sugestoes', methods=['POST','GET'])
