@@ -1,6 +1,6 @@
 from condominio import db
 from sqlalchemy.orm import relationship
-from morador.modules import Morador
+
 
 
 class Chamados(db.Model):
@@ -11,7 +11,7 @@ class Chamados(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = relationship('Morador.id')
+    morador_id = db.Column(db.Integer,unique=True)
 
     def __repr__(self):
         return '<Chamados %r>' % self.name
@@ -24,7 +24,7 @@ class Sugestoes(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = relationship('Morador.id')
+    morador_id = db.Column(db.Integer,unique=True)
 
     def __repr__(self):
         return '<Sugestoes %r>' % self.name     
@@ -37,7 +37,7 @@ class Mensagem(db.Model):
     bloco = db.Column(db.String(20),unique=False)  
     apto = db.Column(db.String(20),unique=False)
     descricao = db.Column(db.String(2000),unique=False)
-    morador_id = relationship('Morador.id')
+    morador_id = db.Column(db.Integer,unique=True)
 
     def __repr__(self):
         return '<Mensagem %r>' % self.name

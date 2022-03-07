@@ -2,6 +2,7 @@ from condominio import db, login_manager
 from flask_login import UserMixin
 
 
+
 @login_manager.user_loader
 def load_morador(user_id):
     return Morador.query.get(user_id)

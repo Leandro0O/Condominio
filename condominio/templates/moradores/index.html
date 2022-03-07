@@ -3,8 +3,34 @@
 {% block content %}
 
 
-
-
+<div class="container-fluid">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('morador')}}">Home</a>
+              </li>
+            
+            </ul>
+            <ul class="navbar-nav  justify-content-end">
+              {% if current_user.is_authenticated %}
+              <span class="nav-link me-3 "> {{current_user.usuario}}</span>
+              <li class="nav-item">
+                <a class="nav-link"  href="{{url_for('logoutmorador')}}">Sair</a>
+              </li>
+              {% else %}
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>
 <div class="row text-center">
     <div class="col">
         <h2>Pagina em construção</h2>
@@ -15,6 +41,9 @@
         </div>
     </div>
 </div>
+<a class="btn btn-primary"  href="{{url_for('moradorchamados')}}">Novo Chamado</a>
 
+    {{chamados.nome}}
+</div>
 
 {% endblock content %}

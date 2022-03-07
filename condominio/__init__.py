@@ -24,6 +24,7 @@ login_manager.login_message = u'Realize o login!'
 
 from condominio.admin import  routes
 from condominio.morador import routes
+from condominio.chamados import routes
 
 
 

@@ -1,24 +1,23 @@
-from turtle import title
 from condominio import db,login_manager,bcrypt,app
 from flask import render_template, session, request, url_for, flash, redirect
 from .modules import Morador
+from condominio.chamados.modules import Chamados,Sugestoes,Mensagem
 from .forms import RegisterMorador, LoginMorador
 from flask_login import login_user, logout_user, login_required, current_user
 
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 @login_required
-def home():   
-    return render_template('index.html',title='Home')
+def morador():
+    morador_id = current_user.id
+    chamados = Chamados.query.filter_by(morador_id=morador_id).first()
+    sugestoes = Sugestoes.query.filter_by(morador_id=morador_id).first()
+    mensagem = Mensagem.query.filter_by(morador_id=morador_id).first()
+
+    return render_template('/moradores/index.html', title='Home', chamados=chamados, sugestoes=sugestoes, mensagem=mensagem)  
 
 
-@app.route('/morador')
-@login_required
-def morador(): 
-    return render_template('moradores/index.html', title = 'Area do Morador')
-
-
-@app.route('/morador/cadastrar', methods=['POST', 'GET'])
+@app.route('/cadastrar', methods=['POST', 'GET'])
 def moradorregister():
     form = RegisterMorador(request.form)
     if request.method == 'POST' and form.validate():
@@ -43,7 +42,7 @@ def moradorregister():
             flash('Erro ao cadastrar morador!', 'danger')
     return render_template('moradores/register.html', title='Cadastro Morador', form=form)     
 
-@app.route('/morador/login', methods=['POST', 'GET'])       
+@app.route('/login', methods=['POST', 'GET'])       
 def loginmorador():
     form = LoginMorador()
     if request.method == 'POST':
@@ -58,7 +57,7 @@ def loginmorador():
        
     return render_template ('moradores/login.html', title='Login Morador', form=form)               
 
-@app.route('/morador/logout')
+@app.route('/logout')
 def logoutmorador():
     logout_user()
     return redirect(url_for('morador'))    
